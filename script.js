@@ -32080,7 +32080,7 @@ function checkPlatformAndNavigate() {
 function showHelpDialog(correctAnswer, options) {
     // Deduct 2 points for using help if score is sufficient
     if (score >= 2) {
-        score = Math.max(0, score - 2);
+      
         document.getElementById("score").textContent = score;
 
         // Check if the surah name starts with "ال"
@@ -32108,6 +32108,7 @@ function showHelpDialog(correctAnswer, options) {
                 </div>
             </div>
         `;
+        
     } else {
         alert("نقاطك غير كافية لاستخدام المساعدة! تحتاج إلى 2 نقاط على الأقل.");
     }
@@ -32115,6 +32116,7 @@ function showHelpDialog(correctAnswer, options) {
 
 // Helper function to determine which letter to show
 function getLetterToShow(surahName, startsWithAl) {
+    score = Math.max(0, score - 2);
     if (startsWithAl) {
         // Remove "ال" prefix (first two characters)
         const wordWithoutAl = surahName.substring(2);
@@ -32125,6 +32127,7 @@ function getLetterToShow(surahName, startsWithAl) {
 }
 
 function removeTwoOptions(correctAnswer) {
+    score = Math.max(0, score - 2);
     const buttons = Array.from(document.querySelectorAll(".option-button"));
     // Filter out buttons that are wrong answers and still visible
     const wrongButtons = buttons.filter(button =>
