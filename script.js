@@ -31915,7 +31915,7 @@ const styles = `
     }
     .help-option {
         margin: 10px;
-        padding: 10px;
+        padding: 5px;
         background-color: #071959;
         color: white;
         border: none;
@@ -32095,7 +32095,7 @@ function showHelpDialog(correctAnswer, options) {
                         loop 
                         mode="normal" 
                         src="help.json" 
-                        style="width: 150px; height: 150px; margin: auto;">
+                        style="width: 110px; height: 110px; margin: auto;">
                     </lottie-player>
                  
                     <p style="font-weight:bold">: اختر وسيلة المساعدة</p>
