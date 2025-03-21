@@ -200,6 +200,6 @@ color:#0b0546 ;
 }
 @media (max-width:500px) {
     body{
-        overflow-y: auto;
+        overflow: auto;
     }
 }
