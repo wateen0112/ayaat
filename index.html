@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lootah Islamic</title>
+</head>
+
+<body>
+    <!--- dialog -->
+    <div id="dialog-main"></div>
+    <!--- dialog -->
+    <div></div>
+    <img src="/image-removebg-preview.png" alt="">
+    <div>
+        <!-- Placeholder for the dynamic Hijri date -->
+        <h2 id="hijri-date"></h2>
+    </div>
+    <div class="progress-label">
+        <p>النقاط <span id="score">0</span></p>
+        <p>المستوى <span id="level">1/6</span></p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="quiz-controller">
+        <p style="margin-top:40px">أية سورة فيها هذه الآية؟</p>
+        <p id="verse-text" style="margin-top:40px"></p>
+        
+        <div id="options-container" style="width:90%; margin-top:14px;"></div>
+        <!-- Add Help Button -->
+        <button id="help-button" style="margin-top: 20px; padding: 10px 20px; background-color: #071959; color: white; border: none; border-radius: 5px; cursor: pointer;display:flex;justify-content:center; align-items: center;background:none;background-color:none">
+          <img  width="40px" style="margin-top: 10px;" src="help.png" alt="">  مساعدة
+        </button>
+        <p id="wrong"></p>
+        <p id="correct"></p>
+        
+    </div>
+<div id="first-letter" style="padding: 20px;"></div>
+    <script>
+        // Function to get and display the current Hijri date
+        function updateHijriDate() {
+            try {
+                // Create Hijri date formatter
+                const hijriFormatter = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                
+                // Get current date and format it
+                const currentDate = new Date();
+                const formattedDate = hijriFormatter.format(currentDate);
+                
+                // Update the HTML element
+                document.getElementById('hijri-date').textContent = formattedDate;
+            } catch (error) {
+                // Fallback in case of error
+                console.error('Error displaying Hijri date:', error);
+                document.getElementById('hijri-date').textContent = 'غير قادر على عرض التاريخ الهجري';
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = function() {
+            updateHijriDate();
+        };
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
