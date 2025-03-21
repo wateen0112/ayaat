@@ -32079,10 +32079,10 @@ function checkPlatformAndNavigate() {
 // Help Functions
 function showHelpDialog(correctAnswer, options) {
     // Deduct 2 points for using help if score is sufficient
-    if (score >= 2) {
+    if (score > 2) {
       
         document.getElementById("score").textContent = score;
-
+     
         // Check if the surah name starts with "ال"
         const startsWithAl = correctAnswer.startsWith("ال");
         let letterToShow = getLetterToShow(correctAnswer, startsWithAl);
@@ -32101,14 +32101,15 @@ function showHelpDialog(correctAnswer, options) {
                     <p style="font-weight:bold">: اختر وسيلة المساعدة</p>
                     <p>مع العلم ان استخدامك للمساعدة يعني انه سيتم خصم 2 من نقاطك.</p>
                      <button class="help-option" onclick="removeTwoOptions('${correctAnswer}')">إزالة إجابتين</button>
-                    <button class="help-option" onclick="showLetter('${letterToShow}', ${startsWithAl})">
+                    <button  id="showLitter" class="help-option" onclick="
+                    showLetter('${letterToShow}', ${startsWithAl})">
                        كشف اول حرف
                     </button>
                  
                 </div>
             </div>
         `;
-        
+    
     } else {
         alert("نقاطك غير كافية لاستخدام المساعدة! تحتاج إلى 2 نقاط على الأقل.");
     }
@@ -32116,7 +32117,7 @@ function showHelpDialog(correctAnswer, options) {
 
 // Helper function to determine which letter to show
 function getLetterToShow(surahName, startsWithAl) {
-    score = Math.max(0, score - 2);
+ 
     if (startsWithAl) {
         // Remove "ال" prefix (first two characters)
         const wordWithoutAl = surahName.substring(2);
@@ -32127,7 +32128,15 @@ function getLetterToShow(surahName, startsWithAl) {
 }
 
 function removeTwoOptions(correctAnswer) {
-    score = Math.max(0, score - 2);
+    // Deduct 2 points for using this help option
+    if (score > 2) {
+        score = score - 2; // Deduct 2 points
+        document.getElementById("score").textContent = score; // Update the displayed score
+    } else {
+        alert("نقاطك غير كافية لاستخدام المساعدة! تحتاج إلى 2 نقاط على الأقل.");
+        return; // Exit the function if the score is insufficient
+    }
+
     const buttons = Array.from(document.querySelectorAll(".option-button"));
     // Filter out buttons that are wrong answers and still visible
     const wrongButtons = buttons.filter(button =>
@@ -32152,28 +32161,35 @@ function removeTwoOptions(correctAnswer) {
 }
 
 function showLetter(letterToShow, startsWithAl) {
+    // Deduct 2 points for using this help option
+    if (score > 2) {
+        score = score - 2; // Deduct 2 points
+        document.getElementById("score").textContent = score; // Update the displayed score
+    } else {
+        alert("نقاطك غير كافية لاستخدام المساعدة! تحتاج إلى 2 نقاط على الأقل.");
+        return; // Exit the function if the score is insufficient
+    }
+
     if (letterToShow) {
         if (startsWithAl) {
-            document.getElementById('first-letter').innerText=`الحرف  الأول هو: ${letterToShow}   `
-            document.getElementById('first-letter').style.bottom=  '0'
+            document.getElementById('first-letter').innerText = `الحرف الأول هو: ${letterToShow}`;
+            document.getElementById('first-letter').style.bottom = '0';
             setTimeout(() => {
-               document.getElementById('first-letter').style.bottom=  '-120px'
-           
+                document.getElementById('first-letter').style.bottom = '-120px';
             }, 2000);
         } else {
-         document.getElementById('first-letter').innerText=`الحرف  الأول هو: ${letterToShow}    `
-         document.getElementById('first-letter').style.bottom=  '0'
-         setTimeout(() => {
-            document.getElementById('first-letter').style.bottom=  '-120px'
-        
-         }, 2000);
+            document.getElementById('first-letter').innerText = `الحرف الأول هو: ${letterToShow}`;
+            document.getElementById('first-letter').style.bottom = '0';
+            setTimeout(() => {
+                document.getElementById('first-letter').style.bottom = '-120px';
+            }, 2000);
         }
     } else {
         alert("اسم السورة قصير جدًا، لا يحتوي على حرف ثالث!");
     }
+
     closeHelpDialog();
 }
-
 function closeHelpDialog() {
     document.getElementById('dialog-main').innerHTML = '';
 }
