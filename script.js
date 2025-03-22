@@ -31916,7 +31916,7 @@ const styles = `
     .help-option {
         margin: 10px;
         padding: 5px;
-        background-color: #071959;
+        background-color: #0A1F37;
         color: white;
         border: none;
         border-radius: 5px;
@@ -31941,7 +31941,7 @@ function loadNewQuestion() {
             document.getElementById('dialog-main').innerHTML = `
                 <div class="wrapper">
                     <div class="dialog-container">
-                        <p style="text-align: center; width:100%; color: #071959;">
+                        <p style="text-align: center; width:100%; color: #0A1F37;">
                             يمكنك تحميل اللعبة كاملة والمشاركة في المسابقات والجوائز
                         </p>
                         <div class="buttons-container">  
@@ -32034,7 +32034,7 @@ function checkAnswer(button, selectedAnswer, correctAnswer) {
         document.getElementById('dialog-main').innerHTML = `
             <div class="wrapper">
                 <div class="dialog-container">
-                    <p style="text-align: center; width:100%; color: #071959;">
+                    <p style="text-align: center; width:100%; color: #0A1F37;">
                         يمكنك تحميل اللعبة كاملة والمشاركة في المسابقات والجوائز
                     </p>
                     <div class="buttons-container">  
@@ -32174,13 +32174,16 @@ function showLetter(letterToShow, startsWithAl) {
         if (startsWithAl) {
             document.getElementById('first-letter').innerText = `الحرف الأول هو: ${letterToShow}`;
             document.getElementById('first-letter').style.bottom = '0';
+            document.getElementById('first-letter').style.display = 'flex';
             setTimeout(() => {
                 document.getElementById('first-letter').style.bottom = '-120px';
+                document.getElementById('first-letter').style.display = 'none';
             }, 2000);
         } else {
             document.getElementById('first-letter').innerText = `الحرف الأول هو: ${letterToShow}`;
             document.getElementById('first-letter').style.bottom = '0';
             setTimeout(() => {
+                document.getElementById('first-letter').style.display = 'none';
                 document.getElementById('first-letter').style.bottom = '-120px';
             }, 2000);
         }
