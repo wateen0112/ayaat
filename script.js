@@ -32031,6 +32031,14 @@ function checkAnswer(button, selectedAnswer, correctAnswer) {
         });
     }
     setTimeout(() => {
+        const androidLink = 'market://details?id=com.lootah.ayah';
+        const iosLink = 'https://apps.apple.com/us/app/lootah-islamic/id6741859109';
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const isAndroid = /android/i.test(userAgent);
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+        
+        const storeLink = isAndroid ? androidLink : iosLink;
+        
         document.getElementById('dialog-main').innerHTML = `
             <div class="wrapper">
                 <div class="dialog-container">
@@ -32039,7 +32047,9 @@ function checkAnswer(button, selectedAnswer, correctAnswer) {
                     </p>
                     <div class="buttons-container">  
                         <button id="cancel">الغاء</button>
-                        <button onclick="checkPlatformAndNavigate()">تحميل</button>
+                        <a href="${storeLink}" style="text-decoration: none; width: 120px; " target="_blank">
+                            <button style="width: 100%;">تحميل</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -32049,6 +32059,7 @@ function checkAnswer(button, selectedAnswer, correctAnswer) {
     currentQuestionIndex++;
 }
 
+// Remove the checkPlatformAndNavigate function as it's no longer needed
 function updateProgressBar(percentage) {
     const progressBar = document.getElementById("progressBar");
     progressBar.style.width = Math.max(10, percentage) + "%"; // Ensure minimum 10%
