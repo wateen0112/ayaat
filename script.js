@@ -32062,18 +32062,22 @@ function handleCancel() {
 }
 
 function checkPlatformAndNavigate() {
-    var androidLink = 'market://details?id=com.lootah.ayah';
-    var iosLink = 'https://apps.apple.com/us/app/lootah-islamic/id6741859109';
+    const androidLink = 'market://details?id=com.lootah.ayah';
+    const iosLink = 'https://apps.apple.com/us/app/lootah-islamic/id6741859109';
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    let storeLink = iosLink; // Default to iOS
     if (/android/i.test(userAgent)) {
-        window.location.href = androidLink;
+        storeLink = androidLink;
     }
-    else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = iosLink;
-    }
-    else {
-        alert("This platform is neither Android nor iOS.");
-    }
+    
+    // Create and click an anchor tag
+    const storeAnchor = document.createElement('a');
+    storeAnchor.href = storeLink;
+    storeAnchor.style.display = 'none';
+    document.body.appendChild(storeAnchor);
+    storeAnchor.click();
+    document.body.removeChild(storeAnchor);
 }
 
 // Help Functions
